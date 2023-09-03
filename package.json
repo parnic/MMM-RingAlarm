@@ -1,0 +1,20 @@
+{
+    "name": "mmm-ring",
+    "version": "0.0.1",
+    "description": "Show status from Ring alarms and control armed status",
+    "main": "MMM-Ring.js",
+    "author": "parnic",
+    "repository": "https://github.com/parnic/MMM-Ring.git",
+    "license": "MIT",
+    "type": "commonjs",
+    "dependencies": {
+        "ring-client-api": "^12.0.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.0.1"
+    },
+    "scripts": {
+        "lint": "eslint --ignore-path .gitignore .",
+        "auth": "ring-auth-cli"
+    }
+}
