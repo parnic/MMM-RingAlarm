@@ -1,6 +1,6 @@
 {
     "name": "mmm-ring",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Show status from Ring alarms and control armed status",
     "main": "MMM-Ring.js",
     "author": "parnic",

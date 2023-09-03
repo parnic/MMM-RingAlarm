@@ -6,7 +6,7 @@
 
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/parnic/MMM-Ring.git`
 2. `cd MMM-Ring`
-3. Execute `npm install --production` to install the node dependencies.
+3. Execute `npm install --production` to install the node dependencies. Note: Node 18+ is required.
 4. Execute `npm run auth` and follow the instructions. Copy the resulting refresh token you receive for the config in the next step.
 5. Add the module inside `config.js` placing it where you prefer. Make sure to set the refreshToken property to the one given by the previous step.
 
