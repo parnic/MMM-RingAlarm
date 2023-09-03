@@ -1,10 +1,10 @@
 {
-    "name": "mmm-ring",
+    "name": "mmm-ringalarm",
     "version": "1.0.0",
     "description": "Show status from Ring alarms and control armed status",
-    "main": "MMM-Ring.js",
+    "main": "MMM-RingAlarm.js",
     "author": "parnic",
-    "repository": "https://github.com/parnic/MMM-Ring.git",
+    "repository": "https://github.com/parnic/MMM-RingAlarm.git",
     "license": "MIT",
     "type": "commonjs",
     "dependencies": {

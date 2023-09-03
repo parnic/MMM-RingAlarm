@@ -1,11 +1,11 @@
-# MMM-ScreenLogic
+# MMM-RingAlarm
 
 [MagicMirror²](https://github.com/MichMich/MagicMirror) module used to connect to Ring alarms. The current status of the alarm is displayed, and pressing the button allows changing the alarm mode (arming/disarming) optionally protected with a code.
 
 ## Installation
 
-1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/parnic/MMM-Ring.git`
-2. `cd MMM-Ring`
+1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/parnic/MMM-RingAlarm.git`
+2. `cd MMM-RingAlarm`
 3. Execute `npm install --production` to install the node dependencies. Note: Node 18+ is required.
 4. Execute `npm run auth` and follow the instructions. Copy the resulting refresh token you receive for the config in the next step.
 5. Add the module inside `config.js` placing it where you prefer. Make sure to set the refreshToken property to the one given by the previous step.
@@ -23,7 +23,7 @@ Here is an example of an entry in config.js
 
 ```js
 {
-    module: 'MMM-Ring',
+    module: 'MMM-RingAlarm',
     header: 'Ring alarm',
     position: 'top_left',
     config: {

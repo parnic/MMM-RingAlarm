@@ -1,11 +1,11 @@
 /* Magic Mirror
- * Module: MMM-Ring
+ * Module: MMM-RingAlarm
  *
- * By parnic https://github.com/parnic/MMM-Ring
+ * By parnic https://github.com/parnic/MMM-RingAlarm
  * MIT Licensed.
  */
 
-Module.register('MMM-Ring',{
+Module.register('MMM-RingAlarm',{
     defaults: {
         refreshToken: undefined,
         pins: undefined, // array of arrays, e.g. [[1,2,3,4], [0,0,0,0]],
@@ -63,7 +63,7 @@ Module.register('MMM-Ring',{
                     this.showKeypad(true);
                     return;
                 } else {
-                    Log.info('MMM-Ring: no PIN required to disarm or no pins specified in config - disarming alarm');
+                    Log.info('MMM-RingAlarm: no PIN required to disarm or no pins specified in config - disarming alarm');
                 }
 
                 this.setAlarmMode(this.desiredMode);
@@ -75,7 +75,7 @@ Module.register('MMM-Ring',{
                 this.showKeypad(true);
                 return;
             } else {
-                Log.info('MMM-Ring: no PIN required to arm or no pins specified in config - arming alarm home');
+                Log.info('MMM-RingAlarm: no PIN required to arm or no pins specified in config - arming alarm home');
             }
 
             this.setAlarmMode(this.desiredMode);
@@ -160,7 +160,7 @@ Module.register('MMM-Ring',{
             const startIdx = this.pressedButtons.length - pin.length;
             const endIdx = startIdx + pin.length;
             if (this.pressedButtons.slice(startIdx, endIdx).every((val, idx) => val === pin[idx])) {
-                Log.info(`MMM-Ring: matched PIN, changing alarm mode to ${this.desiredMode}`);
+                Log.info(`MMM-RingAlarm: matched PIN, changing alarm mode to ${this.desiredMode}`);
                 this.showKeypad(false);
                 this.setAlarmMode(this.desiredMode);
                 this.pressedButtons.length = 0;
@@ -168,7 +168,7 @@ Module.register('MMM-Ring',{
             }
         }
 
-        Log.info('MMM-Ring: no PINs matched entered sequence. Doing nothing.');
+        Log.info('MMM-RingAlarm: no PINs matched entered sequence. Doing nothing.');
     },
 
     setAlarmMode: function(mode) {

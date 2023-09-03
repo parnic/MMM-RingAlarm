@@ -23,7 +23,7 @@ module.exports = NodeHelper.create({
                 this.config = payload;
                 if (!this.config || !this.config.refreshToken) {
                     this.sendSocketNotification('RING_INVALID_CONFIG');
-                    Log.error('MMM-Ring: unable to connect - no refresh token provided');
+                    Log.error('MMM-RingAlarm: unable to connect - no refresh token provided');
                     return;
                 }
 
@@ -61,7 +61,7 @@ module.exports = NodeHelper.create({
             } );
         } catch(e) {
             this.sendSocketNotification('RING_CONNECT_FAILED', e);
-            Log.error(`MMM-Ring: unable to connect - error thrown when connecting: ${e}`);
+            Log.error(`MMM-RingAlarm: unable to connect - error thrown when connecting: ${e}`);
             return;
         }
 
@@ -86,7 +86,7 @@ module.exports = NodeHelper.create({
                     }
 
                     if (this.alarmMode !== data.mode) {
-                        Log.log(`MMM-Ring: mode changed. was ${this.alarmMode}, is ${data.mode}`);
+                        Log.log(`MMM-RingAlarm: mode changed. was ${this.alarmMode}, is ${data.mode}`);
                         this.alarmMode = data.mode;
                         this.sendSocketNotification('RING_ALARM_MODE_CHANGED', this.alarmMode);
                     }
@@ -94,7 +94,7 @@ module.exports = NodeHelper.create({
 
                 this.sendSocketNotification('RING_ALARM_MODE_CHANGED', this.panel.data.mode);
             } else {
-                Log.warn('MMM-Ring: no security panel detected - unable to do anything.');
+                Log.warn('MMM-RingAlarm: no security panel detected - unable to do anything.');
                 this.sendSocketNotification('RING_NO_PANEL_DETECTED');
             }
         }
@@ -102,12 +102,12 @@ module.exports = NodeHelper.create({
 
     setAlarmMode: function(state) {
         if (!this.location) {
-            Log.error(`MMM-Ring: attempted to set alarm to state ${state} but no location has been retrieved to set it on.`);
+            Log.error(`MMM-RingAlarm: attempted to set alarm to state ${state} but no location has been retrieved to set it on.`);
             return;
         }
 
         if (state !== 'all' && state !== 'some' && state !== 'none') {
-            Log.error(`MMM-Ring: unrecognized alarm mode: ${state}, ignoring.`);
+            Log.error(`MMM-RingAlarm: unrecognized alarm mode: ${state}, ignoring.`);
             return;
         }
 
@@ -115,7 +115,7 @@ module.exports = NodeHelper.create({
     },
 
     refreshTokenUpdated: async function({newRefreshToken, oldRefreshToken}) {
-        Log.log('MMM-Ring: Refresh Token Updated: ', newRefreshToken);
+        Log.log('MMM-RingAlarm: Refresh Token Updated: ', newRefreshToken);
 
         if (!oldRefreshToken) {
             return;
@@ -134,7 +134,7 @@ module.exports = NodeHelper.create({
         }
 
         const status = connected ? 'Connected to' : 'Disconnected from';
-        Log.log(`MMM-Ring: **** ${status} location ${location.name} - ${location.id}`);
+        Log.log(`MMM-RingAlarm: **** ${status} location ${location.name} - ${location.id}`);
 
         return retval;
     }
