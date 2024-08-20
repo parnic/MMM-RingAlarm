@@ -100,7 +100,7 @@ module.exports = NodeHelper.create({
         }
     },
 
-    setAlarmMode: function (state) {
+    setAlarmMode: async function (state) {
         if (!this.location) {
             Log.error(`MMM-RingAlarm: attempted to set alarm to state ${state} but no location has been retrieved to set it on.`);
             return;
@@ -111,7 +111,12 @@ module.exports = NodeHelper.create({
             return;
         }
 
-        this.location.setAlarmMode(state);
+        try {
+            await this.location.setAlarmMode(state);
+        } catch(e) {
+            Log.error(`MMM-RingAlarm: caught error setting alarm mode to '${state}': ${e}`);
+            this.sendSocketNotification('RING_ALARM_MODE_CHANGED', this.alarmMode);
+        }
     },
 
     refreshTokenUpdated: async function ({ newRefreshToken, oldRefreshToken }) {
