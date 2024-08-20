@@ -13,11 +13,11 @@ let saved = {
 };
 
 module.exports = NodeHelper.create({
-    start: function() {
+    start: function () {
         readConfig();
     },
 
-    socketNotificationReceived: function(notification, payload) {
+    socketNotificationReceived: function (notification, payload) {
         if (notification === 'RING_CONFIG') {
             if (!this.config) {
                 this.config = payload;
@@ -42,7 +42,7 @@ module.exports = NodeHelper.create({
         }
     },
 
-    connect: async function() {
+    connect: async function () {
         try {
             // use the last-received refresh token from the api if we have one
             let refreshToken = saved.receivedRefresh;
@@ -55,11 +55,11 @@ module.exports = NodeHelper.create({
                 writeConfig();
             }
 
-            this.ringApi = new RingApi( {
+            this.ringApi = new RingApi({
                 refreshToken: refreshToken,
                 debug: true
-            } );
-        } catch(e) {
+            });
+        } catch (e) {
             this.sendSocketNotification('RING_CONNECT_FAILED', e);
             Log.error(`MMM-RingAlarm: unable to connect - error thrown when connecting: ${e}`);
             return;
@@ -100,7 +100,7 @@ module.exports = NodeHelper.create({
         }
     },
 
-    setAlarmMode: function(state) {
+    setAlarmMode: function (state) {
         if (!this.location) {
             Log.error(`MMM-RingAlarm: attempted to set alarm to state ${state} but no location has been retrieved to set it on.`);
             return;
@@ -114,7 +114,7 @@ module.exports = NodeHelper.create({
         this.location.setAlarmMode(state);
     },
 
-    refreshTokenUpdated: async function({newRefreshToken, oldRefreshToken}) {
+    refreshTokenUpdated: async function ({ newRefreshToken, oldRefreshToken }) {
         Log.log('MMM-RingAlarm: Refresh Token Updated: ', newRefreshToken);
 
         if (!oldRefreshToken) {
@@ -125,7 +125,7 @@ module.exports = NodeHelper.create({
         writeConfig();
     },
 
-    onConnected: function(location, connected, haveConnected) {
+    onConnected: function (location, connected, haveConnected) {
         let retval = haveConnected;
         if (!haveConnected && !connected) {
             return retval;
@@ -140,7 +140,7 @@ module.exports = NodeHelper.create({
     }
 });
 
-function readConfig() {
+function readConfig () {
     try {
         const savedStr = fs.readFileSync(configFilename);
         saved = JSON.parse(savedStr);
@@ -149,7 +149,7 @@ function readConfig() {
     }
 }
 
-function writeConfig() {
+function writeConfig () {
     const savedStr = JSON.stringify(saved);
     fs.writeFileSync(configFilename, savedStr);
 }

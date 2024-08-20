@@ -5,25 +5,25 @@
  * MIT Licensed.
  */
 
-Module.register('MMM-RingAlarm',{
+Module.register('MMM-RingAlarm', {
     defaults: {
         refreshToken: undefined,
         pins: undefined, // array of arrays, e.g. [[1,2,3,4], [0,0,0,0]],
         requirePinToArm: false,
-        requirePinToDisarm: true,
+        requirePinToDisarm: true
     },
 
-    start: function() {
+    start: function () {
         this.sendSocketNotification('RING_CONFIG', this.config);
 
         this.createKeypad();
     },
 
-    getStyles: function() {
+    getStyles: function () {
         return ['ring.css'];
     },
 
-    getDom: function() {
+    getDom: function () {
         if (!this.initialized) {
             let wrapper = document.createElement('div');
             wrapper.innerHTML = 'Loading Ring...';
@@ -84,8 +84,8 @@ Module.register('MMM-RingAlarm',{
 
         let btnStatus = document.createElement('div');
         btnStatus.innerHTML = this.alarmMode === 'none' ?
-            'Status: <i class="fa fa-lock-open" aria-hidden="true"></i> Disarmed' :
-            'Status: <i class="fa fa-lock" aria-hidden="true"></i> Armed';
+            'Status: <i class="fa fa-lock-open" aria-hidden="true"></i> Disarmed'
+            : 'Status: <i class="fa fa-lock" aria-hidden="true"></i> Armed';
         btn.appendChild(btnStatus);
 
         let btnLabel = document.createElement('div');
@@ -95,7 +95,7 @@ Module.register('MMM-RingAlarm',{
         return wrapper;
     },
 
-    showKeypad: function(show) {
+    showKeypad: function (show) {
         const pinBg = document.getElementById('ring-pin-bg');
         if (show) {
             pinBg.classList.remove('ring-d-none');
@@ -104,7 +104,7 @@ Module.register('MMM-RingAlarm',{
         }
     },
 
-    createKeypad: function() {
+    createKeypad: function () {
         let bg = document.createElement('div');
         bg.classList.add('ring-pin-bg', 'ring-d-none');
         bg.id = 'ring-pin-bg';
@@ -137,7 +137,7 @@ Module.register('MMM-RingAlarm',{
         root.appendChild(bg);
     },
 
-    clickedKeypadButton: function(btn, evt) {
+    clickedKeypadButton: function (btn, evt) {
         if (!this.pressedButtons) {
             this.pressedButtons = [];
         }
@@ -147,7 +147,7 @@ Module.register('MMM-RingAlarm',{
 
         evt.stopPropagation();
 
-        const longestPin = this.config.pins.reduce((longest, val) => val.length > longest ? val.length: longest, 0);
+        const longestPin = this.config.pins.reduce((longest, val) => (val.length > longest ? val.length : longest), 0);
         while (this.pressedButtons.length > longestPin) {
             this.pressedButtons.shift();
         }
@@ -171,13 +171,13 @@ Module.register('MMM-RingAlarm',{
         Log.info('MMM-RingAlarm: no PINs matched entered sequence. Doing nothing.');
     },
 
-    setAlarmMode: function(mode) {
+    setAlarmMode: function (mode) {
         this.sendSocketNotification('RING_SET_ALARM_MODE', mode);
         this.changingMode = mode;
         this.updateDom();
     },
 
-    socketNotificationReceived: function(notification, payload) {
+    socketNotificationReceived: function (notification, payload) {
         if (notification === 'RING_ALARM_MODE_CHANGED') {
             console.log('Alarm mode changed to', payload);
             this.ringState = 'good';
@@ -194,7 +194,7 @@ Module.register('MMM-RingAlarm',{
         }
     },
 
-    translateMode: function(mode) {
+    translateMode: function (mode) {
         switch (mode) {
         case 'some':
             return 'Armed Home';
