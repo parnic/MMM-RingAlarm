@@ -8,7 +8,7 @@
     "license": "MIT",
     "type": "commonjs",
     "dependencies": {
-        "ring-client-api": "^14.0.1"
+        "ring-client-api": "^13.2.1"
     },
     "devDependencies": {
         "eslint": "^9.29.0"

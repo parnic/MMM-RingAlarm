@@ -2,6 +2,10 @@
 
 [MagicMirror²](https://github.com/MichMich/MagicMirror) module used to connect to Ring alarms. The current status of the alarm is displayed, and pressing the button allows changing the alarm mode (arming/disarming) optionally protected with a code.
 
+## Note
+
+It seems like the ring-client-api library that this uses for Ring connectivity is no longer functioning with MagicMirror. As of now, this module should be expected to be non-functional.
+
 ## Installation
 
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/parnic/MMM-RingAlarm.git`
